@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0a0f14" />
+  <meta name="description" content="TRAFFIX STUDIO — an independent browser-based traffic simulation and network modelling workspace." />
+  <title>TRAFFIX STUDIO — Traffic Simulation Workspace</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a1016'/%3E%3Cpath d='M14 46 28 18h8l14 28h-8l-3-6H25l-3 6z' fill='%2322d3ee'/%3E%3Cpath d='M28 34h8l-4-9z' fill='%230a1016'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="css/app.css" />
+</head>
+<body>
+  <div id="boot">
+    <div class="boot-mark">
+      <svg viewBox="0 0 64 64" width="52" height="52" aria-hidden="true">
+        <rect width="64" height="64" rx="15" fill="#0b131b" stroke="#20303f"/>
+        <path d="M14 46 28 18h8l14 28h-8l-3-6H25l-3 6z" fill="#22d3ee"/>
+        <path d="M28 34h8l-4-9z" fill="#0b131b"/>
+      </svg>
+      <div>
+        <div class="boot-title">TRAFFIX <span>STUDIO</span></div>
+        <div class="boot-sub">Traffic simulation workspace</div>
+      </div>
+    </div>
+    <div class="boot-bar"><i></i></div>
+    <div class="boot-note">Preparing network engine…</div>
+  </div>
+
+  <div id="app" class="app">
+    <header class="topbar">
+      <button class="brand" id="brand-home" title="Project overview">
+        <svg viewBox="0 0 64 64" width="30" height="30" aria-hidden="true">
+          <rect width="64" height="64" rx="15" fill="#0b131b" stroke="#243544"/>
+          <path d="M14 46 28 18h8l14 28h-8l-3-6H25l-3 6z" fill="#22d3ee"/>
+          <path d="M28 34h8l-4-9z" fill="#0b131b"/>
+        </svg>
+        <span class="brand-copy"><b>TRAFFIX</b><span>STUDIO</span></span>
+      </button>
+
+      <nav class="menubar" aria-label="Application menu">
+        <div class="menu" data-menu="file">
+          <button class="menu-btn">File</button>
+          <div class="menu-pop">
+            <button data-action="new-project"><span data-icon="file"></span>New project<kbd>Ctrl N</kbd></button>
+            <button data-action="open-project"><span data-icon="folder"></span>Open project…<kbd>Ctrl O</kbd></button>
+            <button data-action="save-project"><span data-icon="save"></span>Save project<kbd>Ctrl S</kbd></button>
+            <div class="menu-sep"></div>
+            <button data-action="load-demo"><span data-icon="route"></span>Load demo network</button>
+            <button data-action="import-geojson"><span data-icon="upload"></span>Import network (GeoJSON)…</button>
+            <button data-action="export-project"><span data-icon="download"></span>Export project JSON</button>
+            <button data-action="export-results"><span data-icon="chart"></span>Export results CSV</button>
+            <div class="menu-sep"></div>
+            <button data-action="print-report"><span data-icon="file"></span>Print summary report</button>
+          </div>
+        </div>
+        <div class="menu" data-menu="edit">
+          <button class="menu-btn">Edit</button>
+          <div class="menu-pop">
+            <button data-action="undo"><span data-icon="undo"></span>Undo<kbd>Ctrl Z</kbd></button>
+            <button data-action="redo"><span data-icon="redo"></span>Redo<kbd>Ctrl Y</kbd></button>
+            <div class="menu-sep"></div>
+            <button data-action="duplicate"><span data-icon="copy"></span>Duplicate selection<kbd>Ctrl D</kbd></button>
+            <button data-action="delete"><span data-icon="trash"></span>Delete selection<kbd>Del</kbd></button>
+            <button data-action="select-all"><span data-icon="target"></span>Select all<kbd>Ctrl A</kbd></button>
+            <button data-action="deselect"><span data-icon="close"></span>Deselect<kbd>Esc</kbd></button>
+          </div>
+        </div>
+        <div class="menu" data-menu="view">
+          <button class="menu-btn">View</button>
+          <div class="menu-pop">
+            <button data-action="fit"><span data-icon="fit"></span>Fit network<kbd>F</kbd></button>
+            <button data-action="toggle-grid"><span data-icon="grid"></span>Toggle grid<kbd>G</kbd></button>
+            <button data-action="toggle-labels"><span data-icon="eye"></span>Toggle labels<kbd>L</kbd></button>
+            <button data-action="toggle-connectors"><span data-icon="route"></span>Toggle turn paths</button>
+            <div class="menu-sep"></div>
+            <button data-action="mode-3d"><span data-icon="cube"></span>3D perspective view<kbd>3</kbd></button>
+            <button data-action="show-shortcuts"><span data-icon="help"></span>Keyboard shortcuts<kbd>?</kbd></button>
+          </div>
+        </div>
+        <div class="menu" data-menu="simulation">
+          <button class="menu-btn">Simulation</button>
+          <div class="menu-pop">
+            <button data-action="toggle-play"><span data-icon="play"></span>Run / pause<kbd>Space</kbd></button>
+            <button data-action="step"><span data-icon="step"></span>Single step<kbd>S</kbd></button>
+            <button data-action="reset-sim"><span data-icon="reset"></span>Restart simulation</button>
+            <div class="menu-sep"></div>
+            <button data-action="batch"><span data-icon="beaker"></span>Batch replications…</button>
+            <button data-action="open-analysis"><span data-icon="chart"></span>Open evaluation<kbd>E</kbd></button>
+            <div class="menu-sep"></div>
+            <button data-action="check-model"><span data-icon="check"></span>Validate network model</button>
+          </div>
+        </div>
+        <div class="menu" data-menu="help">
+          <button class="menu-btn">Help</button>
+          <div class="menu-pop">
+            <button data-action="show-quickstart"><span data-icon="help"></span>Quick start guide</button>
+            <button data-action="show-features"><span data-icon="layers"></span>Feature coverage</button>
+            <button data-action="show-shortcuts"><span data-icon="clock"></span>Keyboard shortcuts</button>
+            <div class="menu-sep"></div>
+            <button data-action="show-about"><span data-icon="info"></span>About TRAFFIX STUDIO</button>
+          </div>
+        </div>
+      </nav>
+
+      <div class="project-chip" title="Active project">
+        <span class="live-dot"></span>
+        <input id="project-name" value="Riverside Boulevard" aria-label="Project name" spellcheck="false" />
+        <span class="save-state" id="save-state">Saved</span>
+      </div>
+
+      <div class="top-actions">
+        <button class="icon-btn" id="btn-undo" data-action="undo" title="Undo (Ctrl+Z)"><span data-icon="undo"></span></button>
+        <button class="icon-btn" id="btn-redo" data-action="redo" title="Redo (Ctrl+Y)"><span data-icon="redo"></span></button>
+        <span class="action-sep"></span>
+        <button class="icon-btn" id="btn-save" data-action="save-project" title="Save project (Ctrl+S)"><span data-icon="save"></span></button>
+        <span class="action-sep"></span>
+        <div class="run-group">
+          <button class="run-btn" id="btn-play" data-action="toggle-play" title="Run / pause (Space)"><span data-icon="play"></span></button>
+          <button class="run-btn" id="btn-step" data-action="step" title="Single step (S)"><span data-icon="step"></span></button>
+          <button class="run-btn" id="btn-reset" data-action="reset-sim" title="Restart"><span data-icon="reset"></span></button>
+        </div>
+        <select class="speed-select" id="speed-select" title="Simulation speed" aria-label="Simulation speed">
+          <option value="0.5">0.5×</option>
+          <option value="1" selected>1×</option>
+          <option value="2">2×</option>
+          <option value="4">4×</option>
+          <option value="8">8×</option>
+          <option value="16">16×</option>
+          <option value="30">30×</option>
+        </select>
+        <div class="clock-box" title="Simulation clock">
+          <span class="clock-label">SIM</span>
+          <span class="clock-value" id="clock">00:00.0</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="modebar">
+      <div class="mode-tabs" role="tablist" aria-label="Workspace mode">
+        <button class="mode-tab active" data-mode="network" title="Network editor (1)"><span data-icon="road"></span>Network</button>
+        <button class="mode-tab" data-mode="demand" title="Demand and routing (2)"><span data-icon="car"></span>Demand</button>
+        <button class="mode-tab" data-mode="control" title="Signal control (4)"><span data-icon="signal"></span>Signal Control</button>
+        <button class="mode-tab" data-mode="evaluation" title="Evaluation (5)"><span data-icon="chart"></span>Evaluation</button>
+        <button class="mode-tab" data-mode="3d" title="3D view (3)"><span data-icon="cube"></span>3D View</button>
+      </div>
+
+      <div class="tool-sep"></div>
+
+      <div class="tools" id="tools" role="toolbar" aria-label="Network tools">
+        <button class="tool-btn active" data-tool="select" title="Select / move (V)"><span data-icon="cursor"></span><i>V</i></button>
+        <button class="tool-btn" data-tool="node" title="Add junction (N)"><span data-icon="node"></span><i>N</i></button>
+        <button class="tool-btn" data-tool="link" title="Draw link (L)"><span data-icon="road"></span><i>L</i></button>
+        <button class="tool-btn" data-tool="signal" title="Place signal head (G)"><span data-icon="signal"></span><i>G</i></button>
+        <button class="tool-btn" data-tool="detector" title="Place detector (D)"><span data-icon="detector"></span><i>D</i></button>
+        <button class="tool-btn" data-tool="crosswalk" title="Place crossing (C)"><span data-icon="crosswalk"></span><i>C</i></button>
+        <span class="tool-sep small"></span>
+        <button class="tool-btn danger" data-tool="delete" title="Delete selected (Del)"><span data-icon="trash"></span></button>
+      </div>
+
+      <div class="view-actions">
+        <button class="icon-btn" id="btn-fit" data-action="fit" title="Fit network (F)"><span data-icon="fit"></span></button>
+        <button class="icon-btn" id="btn-zoom-out" title="Zoom out"><span data-icon="zoomOut"></span></button>
+        <span class="zoom-readout" id="zoom-readout">100%</span>
+        <button class="icon-btn" id="btn-zoom-in" title="Zoom in"><span data-icon="zoomIn"></span></button>
+        <span class="action-sep"></span>
+        <button class="icon-btn active" id="btn-2d" title="2D plan view"><span class="view-badge">2D</span></button>
+        <button class="icon-btn" id="btn-3d" title="3D perspective view"><span data-icon="cube"></span></button>
+      </div>
+    </div>
+
+    <div class="workspace">
+      <aside class="left-panel">
+        <div class="panel-head">
+          <div>
+            <div class="eyebrow">PROJECT</div>
+            <h2 id="left-title">Network</h2>
+          </div>
+          <button class="icon-btn subtle" id="btn-add-context" title="Add item"><span data-icon="plus"></span></button>
+        </div>
+        <div class="panel-search">
+          <span data-icon="search"></span>
+          <input id="search-input" placeholder="Filter network objects…" autocomplete="off" />
+          <kbd>/</kbd>
+        </div>
+        <div class="panel-scroll" id="explorer"></div>
+        <div class="panel-foot" id="left-footer">
+          <span><i class="dot cyan"></i><b id="stat-links">0</b> links</span>
+          <span><i class="dot amber"></i><b id="stat-nodes">0</b> nodes</span>
+          <span><i class="dot green"></i><b id="stat-veh">0</b> vehicles</span>
+        </div>
+      </aside>
+
+      <main class="viewport" id="viewport">
+        <canvas id="canvas"></canvas>
+
+        <div class="canvas-hud top-left">
+          <div class="hud-card" id="mode-hint">
+            <div class="hud-icon"><span data-icon="road"></span></div>
+            <div>
+              <b>Network plan</b>
+              <p>Draw links, place signals and shape the corridor.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="canvas-hud top-right">
+          <div class="signal-legend" id="signal-legend">
+            <span><i class="sig green"></i>Green</span>
+            <span><i class="sig amber"></i>Amber</span>
+            <span><i class="sig red"></i>Red</span>
+          </div>
+        </div>
+
+        <div class="canvas-hud bottom-right">
+          <div class="view-legend" id="view-legend">
+            <span><i class="legend-line blue"></i>Car</span>
+            <span><i class="legend-line amber"></i>Truck</span>
+            <span><i class="legend-line green"></i>Bus</span>
+            <span><i class="legend-line pink"></i>Pedestrian</span>
+          </div>
+        </div>
+
+        <div class="canvas-tools">
+          <button class="icon-btn glass" id="btn-fit-float" title="Fit view"><span data-icon="fit"></span></button>
+          <button class="icon-btn glass" id="btn-canvas-3d" title="3D view"><span data-icon="cube"></span></button>
+          <button class="icon-btn glass" id="btn-canvas-grid" title="Toggle grid"><span data-icon="grid"></span></button>
+        </div>
+
+        <div class="sim-badge" id="sim-badge">
+          <span class="pulse"></span>
+          <div><b>READY</b><small>Network idle</small></div>
+        </div>
+
+        <div class="view3d-tip hidden" id="view3d-tip">
+          <span data-icon="camera"></span>
+          <span>Drag to orbit · Shift-drag to pan · Scroll to zoom</span>
+          <label>Time of day <input type="range" id="sun-range" min="6" max="21" step="0.25" value="9" /></label>
+        </div>
+
+        <div class="timeline">
+          <div class="tl-meta">
+            <b id="tl-status">Not running</b>
+            <span id="tl-sub">Warm-up 0:00 · Measure 5:00</span>
+          </div>
+          <div class="tl-track" id="tl-track">
+            <div class="tl-warmup" id="tl-warmup"></div>
+            <div class="tl-fill" id="tl-fill"></div>
+            <div class="tl-head" id="tl-head"><i></i></div>
+          </div>
+          <div class="tl-time"><span id="tl-time">0:00</span> / <span id="tl-duration">15:00</span></div>
+        </div>
+      </main>
+
+      <aside class="right-panel">
+        <div class="panel-head">
+          <div>
+            <div class="eyebrow" id="inspector-eyebrow">INSPECTOR</div>
+            <h2 id="inspector-title">Network settings</h2>
+          </div>
+          <button class="icon-btn subtle" id="btn-inspector-more" title="More"><span data-icon="more"></span></button>
+        </div>
+        <div class="panel-scroll" id="inspector"></div>
+      </aside>
+    </div>
+
+    <footer class="statusbar">
+      <div class="status-left">
+        <span class="status-pill" id="status-mode"><span data-icon="road"></span> Network</span>
+        <span id="status-message">Ready</span>
+      </div>
+      <div class="status-right">
+        <span id="status-coords">x 0.0 · y 0.0</span>
+        <span class="status-sep"></span>
+        <span id="status-objects">0 objects</span>
+        <span class="status-sep"></span>
+        <span id="status-fps">60 fps</span>
+        <span class="status-sep"></span>
+        <span class="status-version">v1.0</span>
+      </div>
+    </footer>
+  </div>
+
+  <div class="analysis-overlay hidden" id="analysis-overlay">
+    <div class="analysis-shell">
+      <header class="analysis-head">
+        <div class="analysis-title">
+          <div class="analysis-mark"><span data-icon="chart"></span></div>
+          <div>
+            <div class="eyebrow">EVALUATION WORKSPACE</div>
+            <h2>Simulation results <span id="analysis-run-tag" class="badge">LIVE</span></h2>
+          </div>
+        </div>
+        <nav class="analysis-tabs" id="analysis-tabs">
+          <button class="active" data-atab="overview">Overview</button>
+          <button data-atab="network">Network</button>
+          <button data-atab="classes">Vehicle classes</button>
+          <button data-atab="detectors">Detectors</button>
+          <button data-atab="series">Time series</button>
+          <button data-atab="compare">Runs</button>
+        </nav>
+        <div class="analysis-actions">
+          <span class="analysis-window" id="analysis-window">No measurement window</span>
+          <button class="btn ghost small" data-action="export-results"><span data-icon="download"></span>CSV</button>
+          <button class="btn ghost small" data-action="print-report">Report</button>
+          <button class="icon-btn" id="btn-close-analysis" title="Close"><span data-icon="close"></span></button>
+        </div>
+      </header>
+      <div class="analysis-body" id="analysis-content"></div>
+    </div>
+  </div>
+
+  <div class="modal-root hidden" id="modal-root"></div>
+  <div class="context-menu hidden" id="context-menu"></div>
+  <div class="toast-stack" id="toasts"></div>
+  <input type="file" id="file-input" accept=".json,.geojson,application/json" hidden />
+
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <linearGradient id="grad-accent" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#22d3ee"/><stop offset="1" stop-color="#0ea5e9"/>
+      </linearGradient>
+      <linearGradient id="grad-warm" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#fbbf24"/><stop offset="1" stop-color="#f97316"/>
+      </linearGradient>
+    </defs>
+  </svg>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+{
+  "name": "traffix-studio",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Independent, browser-based traffic simulation studio inspired by the PTV Vissim workflow. Not affiliated with PTV Group.",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "test": "node test/engine.test.mjs"
+  },
+  "license": "MIT"
+}
